@@ -5,7 +5,7 @@ FILE_NAME="website_status.log"
 
 for web_site in "${WEB_SITES[@]}"
 do
-  if curl -s -L --head --request GET "$web_site" | grep "HTTP" | grep "200" > /dev/null
+  if curl -s -L --head --request GET -w "%{http_code}" "$web_site" | grep "HTTP" | grep "200" > /dev/null
   then
     echo "$web_site is up" >> $FILE_NAME
   else
